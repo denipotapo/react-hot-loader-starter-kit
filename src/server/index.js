@@ -21,10 +21,14 @@ import reducers from '../client/reducers';
 import Html from './root.js';
 import assets from '../../webpack-assets.json';
 
+import authRouter from './routers/auth.js';
+
 const app = Express();
 
 app.use(favicon('./public/favicon.ico'));
 app.use('/pub', Express.static('public', { maxAge: '365d' }));
+
+app.use('/', authRouter);
 
 // TODO ensure this gets DCE
 if (process.env.NODE_ENV !== 'production') {
@@ -44,6 +48,13 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.get('*', (req, res) => {
+  if (req.session.views) {
+    req.session.views++;
+  } else {
+    req.session.views = 1;
+  }
+
+  console.log(req.session); // eslint-disable-line no-console
 
   const store = createStore(reducers);
   const context = {};

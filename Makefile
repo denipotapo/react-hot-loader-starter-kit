@@ -17,7 +17,7 @@ all : build
 
 build : $(LIB) public/.dirstamp public/favicon.ico
 
-start :
+start : build
 	node ./lib/server/server.js
 
 start-dev : public/favicon.ico
