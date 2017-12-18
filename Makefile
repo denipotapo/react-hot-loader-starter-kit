@@ -10,7 +10,9 @@ BABEL_ARGS = --no-babelrc --source-maps --presets=react,stage-2 \
 WEBPACK_PROD_ARGS = --config webpack/production.js -p
 WEBPACK_DEV_ARGS = --config webpack/development.js
 
-SRC = $(shell find src -name "*.js" -type f)
+SRC_DIR := src
+
+SRC = $(shell find $(SRC_DIR) -name "*.js" -type f)
 LIB = $(SRC:src/%.js=lib/%.js)
 
 all : build
@@ -28,6 +30,9 @@ start-debug :
 
 test:
 	$(JEST)
+
+watch:
+	fswatch -o $(SRC_DIR) | xargs -n1 -I{} $(MAKE) build
 
 # node/server libs
 $(LIB) : lib/%.js: src/%.js

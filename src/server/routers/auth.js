@@ -4,10 +4,12 @@ import RedisStore from 'connect-redis';
 import passport from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 
+import config from './../../config';
+
 const SessionStore = RedisStore(session);
 
-const GITHUB_CLIENT_ID = '6fca31798d9837066784';
-const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
+const GITHUB_CLIENT_ID = config.get('oauth:github:clientId');
+const GITHUB_CLIENT_SECRET = config.get('oauth:github:secret');
 
 const router = Router();
 
@@ -56,7 +58,7 @@ router.use(passport.session());
 
 router.use(function (req, res, next) {
   if (!req.session) {
-    return next(new Error('oh no')); // handle error
+    return next(new Error('Oh no, no session!')); // handle error
   }
   next(); // otherwise continue
 });

@@ -39,6 +39,8 @@
     "eslint-plugin-react": "^7.0.1",
     "express": "^4.15.3",
     "express-session": "^1.15.6",
+    "json5": "^0.5.1",
+    "nconf": "^0.9.1",
     "passport": "^0.4.0",
     "passport-github2": "^0.1.11",
     "pg": "^7.3.0",
