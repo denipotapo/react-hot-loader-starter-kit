@@ -14,12 +14,12 @@ const GITHUB_CLIENT_SECRET = config.get('oauth:github:secret');
 const router = Router();
 
 passport.serializeUser(function(user, done) {
-  console.log(user); // eslint-disable-line no-console
+  console.log(user);
   done(null, user);
 });
 
 passport.deserializeUser(function(obj, done) {
-  console.log(obj); // eslint-disable-line no-console
+  console.log(obj);
   done(null, obj);
 });
 
